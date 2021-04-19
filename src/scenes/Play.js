@@ -9,6 +9,10 @@ class Play extends Phaser.Scene {
         this.load.image('spaceship', './assets/kanye.png');
         this.load.image('starfield', './assets/starfield.png');
         this.load.audio('skin', './assets/skin.wav');
+        this.load.audio('dead', './assets/dead.wav');
+        this.load.audio('oof', './assets/oof.wav');
+        this.load.audio('scoop', './assets/scoop.wav');
+        this.load.audio('sway', './assets/sway.wav');
         // load spritesheet
         this.load.spritesheet('explosion', './assets/kexplosion.png', {frameWidth: 62, frameHeight: 36, startFrame: 0, endFrame: 9});
     }
@@ -16,7 +20,8 @@ class Play extends Phaser.Scene {
     create() {  
         // place tile sprite 
         this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0, 0);
-        this.music = this.sound.add('skin', {
+        this.music = this.sound.add('skin',  {
+            volume: 0.3,
             loop:true
         }); 
         this.music.play();
@@ -140,7 +145,7 @@ class Play extends Phaser.Scene {
         // score add and repaint
         this.p1Score += ship.points;
         this.scoreLeft.text = this.p1Score; 
-        this.sound.play('sfx_explosion');
+        this.sound.play(Phaser.Math.RND.pick(['dead', 'oof', 'sway', 'scoop', 'sfx_explosion']));
         
       }
 }
