@@ -7,7 +7,7 @@ class Play extends Phaser.Scene {
         // load images/tile sprites
         this.load.image('yandhi', './assets/yandhi.png');
         this.load.image('spaceship', './assets/kanye.png');
-        this.load.image('starfield', './assets/starfield.png');
+        this.load.image('starfield', './assets/bg.png');
         this.load.audio('skin', './assets/skin.wav');
         this.load.audio('dead', './assets/dead.wav');
         this.load.audio('oof', './assets/oof.wav');
@@ -19,7 +19,7 @@ class Play extends Phaser.Scene {
 
     create() {  
         // place tile sprite 
-        this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0, 0);
+        this.starfield = this.add.tileSprite(0, 0, 1808, 480, 'starfield').setOrigin(0, 0);
         this.music = this.sound.add('skin',  {
             volume: 0.3,
             loop:true
