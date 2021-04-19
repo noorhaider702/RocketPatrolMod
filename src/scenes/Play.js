@@ -8,19 +8,20 @@ class Play extends Phaser.Scene {
         this.load.image('yandhi', './assets/yandhi.png');
         this.load.image('spaceship', './assets/kanye.png');
         this.load.image('starfield', './assets/starfield.png');
+        this.load.audio('skin', './assets/skin.wav');
         // load spritesheet
         this.load.spritesheet('explosion', './assets/kexplosion.png', {frameWidth: 62, frameHeight: 36, startFrame: 0, endFrame: 9});
     }
 
     create() { 
-        // place tile sprite
+        // place tile sprite 
         this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0, 0);
 
         // green UI background
         this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0x00FF00).setOrigin(0, 0);
         // white borders
-        //this.add.rectangle(0, 0, game.config.width, borderUISize, 0x00000).setOrigin(0 ,0);
-        //this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 0x00000).setOrigin(0 ,0);
+        this.add.rectangle(0, 0, game.config.width, borderUISize, 0x00000).setOrigin(0 ,0);
+        this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 0x00000).setOrigin(0 ,0);
         //this.add.rectangle(0, 0, borderUISize, game.config.height, 0x00000).setOrigin(0 ,0);
         //this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0x00000).setOrigin(0 ,0);
 
@@ -65,7 +66,7 @@ class Play extends Phaser.Scene {
 
         // GAME OVER flag
         this.gameOver = false;
-
+        
         // 60-second play clock
         scoreConfig.fixedWidth = 0;
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
@@ -84,7 +85,7 @@ class Play extends Phaser.Scene {
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
             this.scene.start("menuScene");
         }
-
+        
         this.starfield.tilePositionX -= 4;  // update tile sprite
 
         if(!this.gameOver) {
@@ -135,7 +136,8 @@ class Play extends Phaser.Scene {
         // score add and repaint
         this.p1Score += ship.points;
         this.scoreLeft.text = this.p1Score; 
+        //this.sound.play('skin'); 
+        //this.sound.play('sfx_explosion');
         
-        this.sound.play('sfx_explosion');
       }
 }
