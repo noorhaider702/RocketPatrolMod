@@ -19,7 +19,7 @@ class Play extends Phaser.Scene {
         this.load.spritesheet('bexplosion', './assets/bexplosion.png', {frameWidth: 28, frameHeight: 28, startFrame: 0, endFrame: 9});
     }
 
-    create() {  
+    create() {   
         // place tile sprite 
         this.starfield = this.add.tileSprite(0, 0, 1808, 480, 'starfield').setOrigin(0, 0);
         this.music = this.sound.add('skin',  {
