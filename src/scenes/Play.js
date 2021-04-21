@@ -7,7 +7,7 @@ class Play extends Phaser.Scene {
         // load images/tile sprites
         this.load.image('yandhi', './assets/yandhi.png');
         this.load.image('spaceship', './assets/kanye.png');
-        this.load.image('starfield', './assets/bg.png');
+        this.load.image('starfield', './assets/bg.PNG');
         this.load.image('bear', './assets/bear.png');
         this.load.audio('skin', './assets/skin.wav');
         this.load.audio('dead', './assets/dead.wav');
