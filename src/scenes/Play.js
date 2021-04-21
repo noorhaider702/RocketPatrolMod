@@ -39,8 +39,8 @@ class Play extends Phaser.Scene {
         this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding, 'yandhi').setOrigin(0.5, 0);
 
         // add Spaceships (x3)
-        this.ship01 = new Spaceship(this, game.config.width + borderUISize*6, borderUISize*4, 'bear', 0, 30).setOrigin(0, 0);
-        this.ship02 = new Spaceship(this, game.config.width + borderUISize*3, borderUISize*5 + borderPadding*2, 'spaceship', 0, 20).setOrigin(0,0);
+        this.ship01 = new Spaceship(this, game.config.width + borderUISize*6, borderUISize*4, 'spaceship', 0, 20).setOrigin(0, 0);
+        this.ship02 = new Spaceship(this, game.config.width + borderUISize*3, borderUISize*5 + borderPadding*2, 'bear', 0, 40).setOrigin(0,0);
         this.ship03 = new Spaceship(this, game.config.width, borderUISize*6 + borderPadding*4, 'spaceship', 0, 10).setOrigin(0,0);
 
         // define keys
@@ -142,7 +142,7 @@ class Play extends Phaser.Scene {
         // temporarily hide ship
         ship.alpha = 0;                         
         // create explosion sprite at ship's position
-        if(ship != this.ship01) {
+        if(ship != this.ship02) {
             let boom = this.add.sprite(ship.x, ship.y, 'explosion').setOrigin(0, 0);
             boom.anims.play('explode');             // play explode animation
             boom.on('animationcomplete', () => {    // callback after anim completes
@@ -151,7 +151,7 @@ class Play extends Phaser.Scene {
             boom.destroy();                       // remove explosion sprite
             });
         } 
-        if(ship == this.ship01) {
+        if(ship == this.ship02) {
             let boom2 = this.add.sprite(ship.x, ship.y, 'bexplosion').setOrigin(0, 0);
             boom2.anims.play('bexplode');             // play explode animation
             boom2.on('animationcomplete', () => {    // callback after anim completes
