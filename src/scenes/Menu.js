@@ -30,10 +30,11 @@ class Menu extends Phaser.Scene {
       // show menu text
       this.add.tileSprite(0, 0, 640, 480, 'dnd').setOrigin(0, 0);
       this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding -150, 'KANYE PATROL', menuConfig).setOrigin(0.5);
-      this.add.text(game.config.width/2, game.config.height/2 +130, 'Use ←→ arrows to move & (F) to fire', menuConfig).setOrigin(0.5);
+      this.add.text(game.config.width/2, game.config.height/2 +85, 'P1: Use ←→ arrows to move & (L) to fire', menuConfig).setOrigin(0.5);
+      this.add.text(game.config.width/2, game.config.height/2 +130, 'P2: Use A D  to move & (F) to fire', menuConfig).setOrigin(0.5);
       menuConfig.backgroundColor = '#d78dfc';
       menuConfig.color = '#000';
-      this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding + 133, 'Press ← for Novice or → for Expert', menuConfig).setOrigin(0.5);
+      this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding + 133, '← for Novice(1 player) or → for Expert(2 player)', menuConfig).setOrigin(0.5);
 
       // define keys
       keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT); 
@@ -45,7 +46,8 @@ class Menu extends Phaser.Scene {
         // Novice mode
         game.settings = {
           spaceshipSpeed: 3,
-          gameTimer: 60000    
+          gameTimer: 60000,
+          players: 1    
         }
         this.sound.play('sfx_select');
         this.scene.start("playScene");   
@@ -54,11 +56,11 @@ class Menu extends Phaser.Scene {
         // Expert mode
         game.settings = {
           spaceshipSpeed: 4,
-          gameTimer: 45000    
+          gameTimer: 45000,
+          players: 2
         }
         this.sound.play('sfx_select');
         this.scene.start("playScene");  
-        
       }
     }
 }

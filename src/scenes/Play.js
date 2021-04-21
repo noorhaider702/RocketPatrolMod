@@ -36,8 +36,14 @@ class Play extends Phaser.Scene {
         //this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0x00000).setOrigin(0 ,0);
 
         // add Rocket (p1)
-        this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding, 'yandhi').setOrigin(0.5, 0);
-
+        if(game.settings.players == 2) {
+            this.p2Rocket = new Rocket2(this, game.config.width - 200, game.config.height - borderUISize - borderPadding, 'yandhi').setOrigin(0.5, 0);
+            this.p1Rocket = new Rocket(this, game.config.width - 400, game.config.height - borderUISize - borderPadding, 'yandhi').setOrigin(0.5, 0);
+        }
+        else {
+            this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding, 'yandhi').setOrigin(0.5, 0);
+        }
+        
         // add Spaceships (x3)
         this.ship01 = new Spaceship(this, game.config.width + borderUISize*6, borderUISize*4, 'spaceship', 0, 20).setOrigin(0, 0);
         this.ship02 = new Spaceship(this, game.config.width + borderUISize*3, borderUISize*5 + borderPadding*2, 'bear', 0, 40).setOrigin(0,0);
@@ -46,6 +52,9 @@ class Play extends Phaser.Scene {
         // define keys
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+        keyL = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L);
+        keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+        keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
 
@@ -105,8 +114,11 @@ class Play extends Phaser.Scene {
         this.starfield.tilePositionX -= 4;  // update tile sprite
         
         if(!this.gameOver) {
-            this.p1Rocket.update();             // update p1
-             this.ship01.update();               // update spaceship (x3)
+            this.p1Rocket.update(); 
+            if(game.settings.players == 2) { 
+                this.p2Rocket.update();     
+            }      // update p1
+            this.ship01.update();               // update spaceship (x3)
             this.ship02.update();
             this.ship03.update();
         }
@@ -123,6 +135,20 @@ class Play extends Phaser.Scene {
         if (this.checkCollision(this.p1Rocket, this.ship01)) {
             this.p1Rocket.reset();
             this.shipExplode(this.ship01);
+        }
+        if(game.settings.players == 2) { 
+            if(this.checkCollision(this.p2Rocket, this.ship03)) {
+                this.p2Rocket.reset();
+                this.shipExplode(this.ship03);
+            }
+            if (this.checkCollision(this.p2Rocket, this.ship02)) {
+                this.p2Rocket.reset();
+                this.shipExplode(this.ship02);
+            }
+            if (this.checkCollision(this.p2Rocket, this.ship01)) {
+                this.p2Rocket.reset();
+                this.shipExplode(this.ship01);
+            }
         }
     }
 
